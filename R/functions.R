@@ -1,5 +1,4 @@
-#' Cretaes IFS obcjet of class S3
-#'
+#' Cretaes IFS object of class S3
 #'
 #'
 #' @import plyr
@@ -7,7 +6,35 @@
 #' @import ggplot2
 #'
 #' @export
-
+#' @param  ... contraction functions.
+#' @param porb_vec vector of probabilities
+#'
+#' @return Creates object of class S3
+#'
+#' @examples
+#' #Define contraction functions
+#'f1 <- function(x,y) {
+#' x<-0.5*x - 0.5
+#' y<-0.5*y + 0.5
+#' return(c(x,y))
+#' }
+#'
+#' f2<-function(x,y){
+#'   x<-0.5*x - 0.5
+#'   y<-0.5*y - 0.5
+#'   return(c(x,y))
+#' }
+#'
+#' f3<-function(x,y){
+#'   x<-0.5*x + 0.5
+#'   y<-0.5*y - 0.5
+#'   return(c(x,y))
+#' }
+#' #Define probability  vector
+#' p <- c(0.3333, 0.3333, 0.3334)
+#'
+#' sierpinski_points <-createIFS(f1, f2, f3, prob_vec=p)
+#'
 
 createIFS <- function(..., prob_vec) {
 
@@ -31,7 +58,7 @@ createIFS <- function(..., prob_vec) {
 #' @import dplyr
 #' @import ggplot2
 #'
-#' @export
+#'
 
 
 createPoints <- function(functions, point = c(0,0), n){
@@ -74,7 +101,7 @@ createPoints <- function(functions, point = c(0,0), n){
     points <- rbind(points, new_points)
 
   }
-
+  points$col <- as.factor(points$col)
   return(points)
 }
 
@@ -88,6 +115,9 @@ createPoints <- function(functions, point = c(0,0), n){
 #' @import ggplot2
 #'
 #' @export
+#'
+#'
+#'
 
 
 callFunction <- function(x,y){
@@ -121,8 +151,18 @@ callFunction <- function(x,y){
 #' @import ggplot2
 #' @export
 #'
+#'
+#' @param  IFS object of class IFS_FS
+#' @param point starting point
+#' @param n number of iteration
+#'
+#' @return Creates plot of fractal
+#'
+#' @examples
+#' # Example sierpinski_points from createIFS
+#' plot(sierpinski_points, 10)
 
-plot_IFS_S3 <- function(IFS,point=c(0,0), n) {
+plot.IFS_S3 <- function(IFS,point=c(0,0), n) {
 
   data <- createPoints(IFS,point,n)
 

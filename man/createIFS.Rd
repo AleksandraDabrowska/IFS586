@@ -2,10 +2,43 @@
 % Please edit documentation in R/functions.R
 \name{createIFS}
 \alias{createIFS}
-\title{Cretaes IFS obcjet of class S3}
+\title{Cretaes IFS object of class S3}
 \usage{
 createIFS(..., prob_vec)
 }
+\arguments{
+\item{...}{contraction functions.}
+
+\item{porb_vec}{vector of probabilities}
+}
+\value{
+Creates object of class S3
+}
 \description{
-Cretaes IFS obcjet of class S3
+Cretaes IFS object of class S3
+}
+\examples{
+#Define contraction functions
+f1 <- function(x,y) {
+x<-0.5*x - 0.5
+y<-0.5*y + 0.5
+return(c(x,y))
+}
+
+f2<-function(x,y){
+  x<-0.5*x - 0.5
+  y<-0.5*y - 0.5
+  return(c(x,y))
+}
+
+f3<-function(x,y){
+  x<-0.5*x + 0.5
+  y<-0.5*y - 0.5
+  return(c(x,y))
+}
+#Define probability  vector
+p <- c(0.3333, 0.3333, 0.3334)
+
+sierpinski_points <-createIFS(f1, f2, f3, prob_vec=p)
+
 }
