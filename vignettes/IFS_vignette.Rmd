@@ -24,6 +24,7 @@ IFS586 package creates fractals by method IFS. The package contains the followin
 
 Pakcage contaons varius examples of fractals constructed by method IFS. 
  
+### Sieprinski triangle
 First define contractions functions and probability vector
 ```{r, include=FALSE}
 library(IFS586)
@@ -54,17 +55,36 @@ plot(sierpisnki, n=15)
 
 ```
 
+### Non-linear sierpinski triangle
+Contraction fucntions consist 
+```{r,include=FALSE}
+f1<-function(x,y){
+  x <- 175*x/500*x/500 + 75*x/500 + 100
+  y <- 175*y/500*y/500 + 75*y/500 + 220
+  return(c(x,y))
+}
 
+f2<-function(x,y){
+  x <- 175*x/500*x/500 + 75*x/500 + 200
+  y <- 175*y/500*y/500 + 75*y/500 + 50
+  return(c(x,y))
+}
 
-## More Examples
+f3<-function(x,y){
+  x <- 175*x/500*x/500 + 75*x/500 + 50
+  y <- 175*y/500*y/500 + 75*y/500 + 50
+  return(c(x,y))
+}
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+p<-c(0.3333, 0.3333, 0.3334)
+sierpinski_nonlinear <- createIFS(f1, f2, f3, prob_vec=p)
 ```
 
-Also a quote using `>`:
+```{r}
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+plot(sierpinski_nonlinear, n=15)
+```
+## More Examples
+
+
+([via](https://creativecommons.org/publicdomain/zero/1.0/))
