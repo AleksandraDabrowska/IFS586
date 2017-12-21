@@ -8,5 +8,5 @@ Install with
 devtools::install_github("sgorka/IFS586")
 ```
 
-[Vignette](./vignettes/IFS_vignette.html)
+[Vignette](https://rawgit.com/sgorka/IFS586/master/vignettes/IFS_vignette.html)
 
