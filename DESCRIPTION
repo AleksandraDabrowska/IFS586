@@ -1,11 +1,9 @@
 Package: IFS586
 Type: Package
-Title: What the Package Does (Title Case)
+Title: IFS586 package creates fractals by method IFS
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Szymon Górka Justyna Zagórowicz
+Description: The package contains the following functionalities: creates object S3 form contraction functions; plot fractals from object IFS_S3;
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
