@@ -1,120 +1,147 @@
 
-f1<-function(x,y){
+
+trian1 <- function(x,y) {
   x<-0.5*x - 0.5
   y<-0.5*y + 0.5
   return(c(x,y))
 }
 
-f2<-function(x,y){
+trian2 <- function(x,y) {
   x<-0.5*x - 0.5
   y<-0.5*y - 0.5
   return(c(x,y))
 }
 
-f3<-function(x,y){
+trian3 <- function(x,y) {
   x<-0.5*x + 0.5
   y<-0.5*y - 0.5
   return(c(x,y))
 }
 
-p<-c(0.3333, 0.3333, 0.3334)
+trianp <- c(0.3333, 0.3333, 0.3334)
 
 po <- c(0,0)
 
-tmp<-createIFS(f1, f2, f3, prob_vec=p)
+sierpinski_triangle <- createIFS(trian1, trian2, trian3, prob_vec=trianp)
 
-tmp
-
-pkty <- createPoints(tmp, n=10)
-
-pkty
-
-plot(tmp, n=15)
+plot(sierpinski_triangle, n=15)
 
 
 
 #-----------------
 # sierpinski differences
 #http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.403.2843&rep=rep1&type=pdf
-f1<-function(x,y){
+trian1_nl <- function(x,y) {
   x <- 175*x/500*x/500 + 75*x/500 + 100
   y <- 175*y/500*y/500 + 75*y/500 + 220
   return(c(x,y))
 }
 
-f2<-function(x,y){
+trian2_nl <- function(x,y ){
   x <- 175*x/500*x/500 + 75*x/500 + 200
   y <- 175*y/500*y/500 + 75*y/500 + 50
   return(c(x,y))
 }
 
-f3<-function(x,y){
+trian3_nl <- function(x,y) {
   x <- 175*x/500*x/500 + 75*x/500 + 50
   y <- 175*y/500*y/500 + 75*y/500 + 50
   return(c(x,y))
 }
 
-p<-c(0.3333, 0.3333, 0.3334)
+trianp <- c(0.3333, 0.3333, 0.3334)
 
 
+sierpinski_triangle_nonlinear <- createIFS(trian1_nl, trian2_nl, trian3_nl, prob_vec=prob_nl)
+plot(sierpinski_triangle_nonlinear, n=15)
 
-tmp<-createIFS(f1, f2, f3, prob_vec=p)
-plot_IFS_S3(tmp, n=15)
 
+#### SMOK
 
-#
-
-f1<-function(x,y){
-  x <- 1/sqrt(2)*(cos(45)*x - sin(45)*y)
-  y <- 1/sqrt(2)*(sin(45)*x + cos(45)*y)
+dragon1 <- function(x,y) {
+  x <- -0.4*x - 1
+  y <- -0.4*y+0.1
   return(c(x,y))
 }
 
-f2<-function(x,y){
-  x <- 1/sqrt(2)*(cos(135)*x - sin(135)*y) + 1
-  y <- 1/sqrt(2)*(sin(135)*x + cos(135)*y)
+dragon2 <- function(x,y) {
+  x <- 0.76*x-0.4*y
+  y <- 0.4*x+0.76*y
   return(c(x,y))
 }
 
-p<-c(0.5, 0.5)
+dragonp <- c(0.5, 0.5)
+
+dragon <- createIFS(dragon1, dragon2, prob_vec = dragonp)
+
+plot(dragon, n=20)
+save(dragon1, dragon2, dragonp, dragon, trian1, trian2, trian3, trianp, sierpinski_triangle,
+     trian1_nl,trian2_nl, trian3_nl,sierpinski_triangle_nonlinear , file='./data/examples.rda')
 
 
+## maple leaf
 
-tmp<-createIFS(f1, f2, prob_vec=p)
-plot_IFS_S3(tmp, n=15, point = c(0,1))
-
-
-#=====================
-
-f1 <- function(x,y) {
-  x <- 0.08*x + 0.11*y + 0.075
-  y <- 0.02*x - 0.59*y - 0.6
-  return(c(x,y))
-}
-f2 <- function(x,y) {
-  x <- 0.308*x + 0.312*y + 0.043
-  y <- -0.29*x + 0.31*y - 0.26
-  return(c(x,y))
-}
-f3 <- function(x,y) {
-  x <- -0.29*x + 0.3*y + 0.05
-  y <- -0.29*x + 0.3*y - 0.34
-  return(c(x,y))
-}
-f4 <- function(x,y) {
-  x <- 0.764*x + 0.197*y + 0.077
-  y <- -0.38*x + 0.401*y - 0.48
-  return(c(x,y))
-}
-f5 <- function(x,y) {
-  x <- 0.201*x + 0.25*y - 0.02
-  y <- -0.24*x + 0.25*y - 0.74
+leaf1 <- function(x,y) {
+  x <- 0.14*x + 0.01*y - 0.08
+  y <- 0*x + 0.51*y - 1.31
   return(c(x,y))
 }
 
-p <-c(0.24, 0.18, 0.18, 0.24, 0.16)
-tmp<-createIFS(f1, f2, f3, f4, f5, prob_vec=p)
-plot_IFS_S3(tmp, n=15 )
+leaf2 <- function(x,y) {
+  x <- 0.43*x + 0.52*y + 1.49
+  y <- -0.45*x + 0.5*y - 0.75
+  return(c(x,y))
+}
 
+leaf3 <- function(x,y) {
+  x <- 0.45*x - 0.49*y - 1.62
+  y <- 0.47*x + 0.47*y - 0.74
+  return(c(x,y))
+}
+
+leaf4 <- function(x,y) {
+  x <- 0.49*x + 0*y + 0.02
+  y <- 0*x + 0.51*y + 1.62
+  return(c(x,y))
+}
+
+leaf_prob <- c(0.1,0.35,0.35,0.2)
+
+maple_leaf <- createIFS(leaf1,leaf2, leaf3, leaf4, prob_vec = leaf_prob)
+plot(maple_leaf, n = 20)
+
+## maple leaf
+
+fem1 <- function(x,y) {
+  x <- 0*x + 0*y + 0.0
+  y <- 0*x + 0.16*y + 0
+  return(c(x,y))
+}
+
+fem2 <- function(x,y) {
+  x <- 0.85*x + 0.04*y + 0
+  y <- -0.04*x + 0.85*y + 1.6
+  return(c(x,y))
+}
+
+fem3 <- function(x,y) {
+  x <- 0.2*x - 0.26*y - 0
+  y <- 0.23*x + 0.22*y + 1.6
+  return(c(x,y))
+}
+
+fem4 <- function(x,y) {
+  x <- -0.15*x + 0.28*y + 0
+  y <- 0.26*x + 0.24*y + 0.44
+  return(c(x,y))
+}
+
+fem_prob <- c(0.01,0.85,0.07,0.07)
+
+fem <- createIFS(fem1,fem2, fem3, fem4, prob_vec = fem_prob)
+plot(fem, n = 20)
+
+save(leaf1, leaf2,leaf3, leaf4, leaf_prob, maple_leaf,
+     fem1,fem2, fem3,fem4 ,fem, file='./data/examples2.rda')
 
 

@@ -2,10 +2,10 @@
 % Please edit documentation in R/functions.R
 \name{createPoints}
 \alias{createPoints}
-\title{Cretaes points based ....}
+\title{Calculates points coordinations}
 \usage{
-createPoints(functions, point = c(0, 0), n)
+createPoints(bunch_of_contration, point = c(0, 0), n)
 }
 \description{
-Cretaes points based ....
+Calculates points coordinations
 }

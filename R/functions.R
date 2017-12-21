@@ -38,19 +38,21 @@
 
 createIFS <- function(..., prob_vec) {
 
-  func <- list(...)
-  if(length(func)!=length(prob_vec)) {
-
-    stop("err")
+  bunch_of_contration <- list(...)
+  if(length(bunch_of_contration)!=length(prob_vec)) {
+    stop("Diffrent number of contraction functions
+         and lenght of probability vector")
   }
+  if(sum(prob_vec) != 1) {
+    stop("Probability does not sum up to 1")
+  }
+  bunch_of_contration <- list(contrations=bunch_of_contration,probabilities= prob_vec)
+  class(bunch_of_contration) <- "IFS_S3"
 
-  functions <- list(func, prob_vec)
-  class(functions) <- "IFS_S3"
-
-  return(functions)
+  return(bunch_of_contration)
 }
 
-#' Cretaes points based ....
+#' Calculates points coordinations
 #'
 #'
 #'
@@ -61,38 +63,35 @@ createIFS <- function(..., prob_vec) {
 #'
 
 
-createPoints <- function(functions, point = c(0,0), n){
+createPoints <- function(bunch_of_contration, point = c(0,0), n){
 
-  if(class(functions) != "IFS_S3"){
+  if(class(bunch_of_contration) != "IFS_S3"){
 
     stop("err")
   }
 
-  no_func <- length( functions[[1]] )
+  no_func <- length( bunch_of_contration[[1]] )
   points <- data.frame(x = point[1],
                      y = point[2], col=1)
 
 
-  for(i in 1:n){
+  for(i in 1:n) {
 
-    new_points <- t(mapply(function(x, y, col){
+    new_points <- t(mapply(function(x, y, col) {
 
       prob <- runif(1)
       prob_test <- 0
 
-      for( j in 1:length( functions[[2]]) ){
+      for( j in 1:length( bunch_of_contration[[2]]) ) {
 
-        prob_test <- prob_test + functions[[2]][[j]]
+        prob_test <- prob_test + bunch_of_contration[[2]][[j]]
 
-        if(prob<=prob_test){
-
-         break()
-
-          #return(functions[[1]][[j]](x,y))
+        if(prob<=prob_test) {
+          break()
         }
       }
 
-      return(c(functions[[1]][[j]](x,y), j))
+      return(c(bunch_of_contration[[1]][[j]](x,y), j))
     },
     x = points$x, y = points$y))
 
@@ -102,44 +101,9 @@ createPoints <- function(functions, point = c(0,0), n){
 
   }
   points$col <- as.factor(points$col)
+  colnames(points)[3] <- 'contraction_number'
   return(points)
 }
-
-
-#'  ....
-#'
-#'
-#'
-#' @import plyr
-#' @import dplyr
-#' @import ggplot2
-#'
-#' @export
-#'
-#'
-#'
-
-
-callFunction <- function(x,y){
-
-  prob <- runif(1)
-  prob_test <- 0
-
-  for( j in 1:length( functions[[2]]) ){
-
-    prob_test <- prob_test + functions[[2]][[j]]
-
-    if(p <= prob_test){
-
-       #break()
-
-      return(data[[1]][[j]](x,y))
-    }
-  }
-
-  return(data[[1]][[j]](x,y))
-}
-
 
 
 #'  Plot fractal calculated by IFS method
@@ -159,14 +123,14 @@ callFunction <- function(x,y){
 #' @return Creates plot of fractal
 #'
 #' @examples
-#' # Example sierpinski_points from createIFS
-#' plot(sierpinski_points, 10)
+#' # Example sierpinski_triangle from createIFS
+#' plot(sierpinski_triangle, 10)
 
 plot.IFS_S3 <- function(IFS,point=c(0,0), n) {
 
   data <- createPoints(IFS,point,n)
 
-  p <- ggplot(data, aes(x,y, color=col, group=col)) + geom_point(size=0.25) +
+  p <- ggplot(data, aes(x,y, color=contraction_number, group=contraction_number)) + geom_point(size=0.25) +
     theme(
       panel.background = element_rect(fill='white'),
       panel.grid.major.x = element_blank(),

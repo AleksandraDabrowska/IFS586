@@ -3,8 +3,8 @@ Type: Package
 Title: IFS586 package creates fractals by method IFS
 Version: 0.1.0
 Authors@R: c(
-    person("Szymon", "GÃ³rka", ,role = c("aut", "cre")),
-    person("Justyna","ZagÃ³rowicz", ,role = c("aut"))
+    person("Szymon", "Górka",email='temp@tmp.com' ,role = c("aut", "cre")),
+    person("Justyna","Zagórowicz",role = c("aut"))
     )
 Description: The package contains the following functionalities: creates object S3 form contraction functions; plot fractals from object IFS_S3.
 License: CC0
@@ -16,5 +16,6 @@ Imports:
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr
