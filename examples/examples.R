@@ -144,4 +144,99 @@ plot(fem, n = 20)
 save(leaf1, leaf2,leaf3, leaf4, leaf_prob, maple_leaf,
      fem1,fem2, fem3,fem4 ,fem, file='./data/examples2.rda')
 
+### choinka dla Szymona
+
+ch1 <- function(x,y){
+  x <- 0.03*x
+  y <- 0.1*y
+  return(c(x,y))
+}
+
+ch2 <- function(x,y){
+  x <- 0.85*x
+  y <- 0.85*y+1.5
+  return(c(x,y))
+}
+
+ch3 <- function(x,y){
+  x <- 0.8*x
+  y <- 0.8*y+1.5
+  return(c(x,y))
+}
+
+ch4 <- function(x,y){
+  x <- 0.2*x-0.08*y
+  y <- 0.15*x+0.22*y+0.85
+  return(c(x,y))
+}
+
+ch5 <- function(x,y){
+  x <- -0.2*x+0.08*y
+  y <- 0.15*x+0.22*y+0.85
+  return(c(x,y))
+}
+
+ch6 <- function(x,y){
+  x <- 0.25*x-0.1*y
+  y <- 0.12*x+0.25*y+0.3
+  return(c(x,y))
+}
+
+ch7 <- function(x,y){
+  x <- -0.2*x+0.1*y
+  y <- 0.12*x+0.2*y+0.4
+  return(c(x,y))
+}
+
+
+p_ch <- c(0.02, 0.6, 0.1, 0.07, 0.07, 0.07, 0.07)
+
+christmas_tree <- createIFS(ch1, ch2, ch3, ch4, ch5, ch6, ch7, prob_vec = p_ch)
+
+plot(christmas_tree, point=c(0, 0), n=15)
+
+
+
+
+
+### PENTAGON
+pentagon1 <- function(x,y){
+  x <- 0.382*x
+  y <- 0.382*y
+  return(c(x,y))
+}
+
+pentagon2 <- function(x,y){
+  x <- 0.382*x+0.618
+  y <- 0.382*y
+  return(c(x,y))
+}
+
+pentagon3 <- function(x,y){
+  x <- 0.382*x+0.809
+  y <- 0.382*y+0.588
+  return(c(x,y))
+}
+
+pentagon4 <- function(x,y){
+  x <- 0.382*x+0.309
+  y <- 0.382*y+0.951
+  return(c(x,y))
+}
+
+pentagon5 <- function(x,y){
+  x <- 0.382*x-0.191
+  y <- 0.382*y+0.588
+  return(c(x,y))
+}
+
+pentagonp <- c(0.2, 0.2, 0.2, 0.2, 0.2)
+
+pentagon <- createIFS(pentagon1, pentagon2, pentagon3, pentagon4, pentagon5, prob_vec = pentagonp)
+
+plot(pentagon, n=15)
+
+save(ch1, ch2, ch3, ch4, ch5, ch6, ch7, p_ch,
+     christmas_tree,pentagon1, pentagon2, pentagon3, pentagon4, pentagon5,pentagonp,pentagon, file='./data/examples3.rda')
+
 

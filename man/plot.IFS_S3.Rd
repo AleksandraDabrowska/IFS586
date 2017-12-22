@@ -21,5 +21,5 @@ Plot fractal calculated by IFS method
 }
 \examples{
 # Example sierpinski_triangle from createIFS
-plot(sierpinski_triangle, 10)
+plot(sierpinski_triangle, n = 10)
 }

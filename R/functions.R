@@ -124,7 +124,7 @@ createPoints <- function(bunch_of_contration, point = c(0,0), n){
 #'
 #' @examples
 #' # Example sierpinski_triangle from createIFS
-#' plot(sierpinski_triangle, 10)
+#' plot(sierpinski_triangle, n = 10)
 
 plot.IFS_S3 <- function(IFS,point=c(0,0), n) {
 
